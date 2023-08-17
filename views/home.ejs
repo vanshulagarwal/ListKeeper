@@ -9,24 +9,39 @@
 
 <body>
     <h1>ToDo Keeper</h1>
-    <ul>
-        <% for(let item of allItems){ %>
-            <li> 
-                <form action="/completed/<%= item._id %>?_method=PUT" method="POST"> 
-                    <input type="checkbox" <%= item.completed==true?'checked':'' %> onChange=this.form.submit() > 
-                </form> 
-                <%= item.task %>
-                <form action="/delete/<%= item._id %>?_method=DELETE" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        <% } %>
-    </ul>
+    <% for(let List of allLists){ %>
+        <div style="border: 1px solid black;">
+            <h4>
+                <%= List.title %>
+            </h4>
+            <form action="/home/<%= List._id %>?_method=DELETE" method="POST">
+                <button>DELETE LIST</button>
+            </form>
 
-    <form action="/home" method="POST">
-        <label for="task">Task</label>
-        <input id="task" type="text" name="task">
-    </form>
+            <div>
+                <% for(let item of List.items) { %>
+                    <div style="border: 1px solid black;">
+                        <form action="/completed/<%= item._id %>?_method=PUT" method="POST">
+                            <input type="checkbox" <%=item.completed==true?'checked':'' %>
+                            onChange=this.form.submit() >
+                        </form>
+                        <%= item.task %>
+                            <form action="/home/<%= List._id %>/items/<%= item._id %>?_method=DELETE" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                    </div>
+                    <% } %>
+            </div>
+            <form action="/home/<%= List._id %>" method="POST">
+                <label for="task">Task</label>
+                <input id="task" type="text" name="task" placeholder="Add Item">
+            </form>
+        </div>
+        <% } %>
+            <form action="/home" method="POST">
+                <label for="list-title">New List</label>
+                <input id="list-title" type="text" name="title" placeholder="title">
+            </form>
 </body>
 
 </html>

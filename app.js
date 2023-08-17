@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const Item = require('./models/item');
+const List = require('./models/list');
 const methodOverride = require('method-override');
 
 const dbUrl = 'mongodb://127.0.0.1:27017/todo';
@@ -21,39 +22,50 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.get('/home', async (req, res) => {
-    const allItems = await Item.find({});
-    res.render('home', { allItems });
+    const allLists = await List.find({}).populate('items');
+    res.render('home', { allLists });
 })
 
 app.post('/home', async (req, res) => {
+    const newList = new List({ ...req.body });
+    await newList.save();
+    console.log(newList);
+    res.redirect('/home');
+})
+
+app.post('/home/:id', async (req, res) => {
+    const { id } = req.params;
+    const myList = await List.findById(id);
     const newItem = new Item({ ...req.body, completed: false });
+    myList.items.push(newItem);
     await newItem.save();
-    console.log(newItem);
+    await myList.save();
+    console.log(myList);
+    res.redirect('/home');
+})
+
+app.delete('/home/:id', async (req, res) => {
+    const {id}=req.params;
+    const myList=await List.findByIdAndDelete(id); 
     res.redirect('/home');
 })
 
 app.put('/completed/:id', async (req, res) => {
     const { id } = req.params;
-    const item = await Item.findById(id);
-    const toggleCompleted = !(item.completed);
+    const myItem = await Item.findById(id);
+    const toggleCompleted = !(myItem.completed);
     const updatedItem = await Item.findByIdAndUpdate(id, { completed: toggleCompleted });
     console.log(updatedItem);
     res.redirect('/home');
 })
 
-app.delete('/delete/:id', async (req, res) => {
-    const { id } = req.params;
-    const item = await Item.findByIdAndDelete(id);
-    console.log(item);
+app.delete('/home/:listId/items/:itemId', async (req, res) => {
+    const { listId, itemId } = req.params;
+    const myList = await List.findByIdAndUpdate(listId, { $pull: { items: itemId } });
+    await Item.findByIdAndDelete(itemId);
+    console.log(myList);
     res.redirect('/home');
 })
-
-// app.post('/home', (req, res) => {
-// })
-
-// app.get('/create', (req, res) => {
-//     res.render('new');
-// })
 
 const port = 3000;
 app.listen(port, () => {

@@ -5,43 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo Keeper</title>
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>ToDo Keeper</h1>
+    <div class="cursor"></div>
+<div class="cursor2"></div>
+    <main>
+    <h1>List Keeper</h1>
+    <div class="grid-container">
     <% for(let List of allLists){ %>
-        <div style="border: 1px solid black;">
-            <h4>
-                <%= List.title %>
-            </h4>
-            <form action="/home/<%= List._id %>?_method=DELETE" method="POST">
-                <button>DELETE LIST</button>
-            </form>
+        <div class="list-card">
+            <div class="list-card-title">
+                <h4>
+                    <%= List.title %>
+                </h4>
+                <form action="/home/<%= List._id %>?_method=DELETE" method="POST">
+                    <button class="btn-list-delete"><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></button>
+                </form>
+            </div>
 
-            <div>
+            <div class="list-items">
                 <% for(let item of List.items) { %>
-                    <div style="border: 1px solid black;">
+                    <div class="item-card">
                         <form action="/completed/<%= item._id %>?_method=PUT" method="POST">
-                            <input type="checkbox" <%=item.completed==true?'checked':'' %>
+                            <input class="item-input-checkbox" type="checkbox" <%=item.completed==true?'checked':'' %>
                             onChange=this.form.submit() >
                         </form>
-                        <%= item.task %>
-                            <form action="/home/<%= List._id %>/items/<%= item._id %>?_method=DELETE" method="POST">
-                                <button type="submit">Delete</button>
-                            </form>
+                        <div <%= item.completed==true?"style=opacity:0.5;":"" %>><%= item.task %></div>
+                        <!-- <div class="item-completed"><i class="fa-solid fa-check" style="color: #00ff00;"></i></div> -->
+                        <form action="/home/<%= List._id %>/items/<%= item._id %>?_method=DELETE" method="POST">
+                            <button class="btn-item-delete" type="submit"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                        </form>
                     </div>
-                    <% } %>
+                <% } %>
             </div>
-            <form action="/home/<%= List._id %>" method="POST">
-                <label for="task">Task</label>
-                <input id="task" type="text" name="task" placeholder="Add Item">
-            </form>
+            <div class="add-item-form">
+                <form action="/home/<%= List._id %>" method="POST">
+                    <input class="add-item-input" type="text" name="task" placeholder="Add Item">
+                </form>
+            </div>
         </div>
-        <% } %>
-            <form action="/home" method="POST">
-                <label for="list-title">New List</label>
-                <input id="list-title" type="text" name="title" placeholder="title">
-            </form>
+    <% } %>
+    <div class="list-card new-list-card">
+        <form action="/home" method="POST">
+            <input id="new-list-title" type="text" name="title" placeholder="New List" required>
+            <button class="btn-new-list" type="submit"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+        </form>
+    </div>
+</div>
+</main>
+
+<script src="/javascripts/home.js"></script>
 </body>
 
 </html>

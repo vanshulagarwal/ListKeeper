@@ -1,0 +1,173 @@
+*{
+    cursor:none;
+}
+
+.cursor {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    border: 2px solid rgb(247, 238, 116);
+    transition: all 200ms ease-out;
+    position: fixed;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    transform: translate(calc(-50% + 15px), -50%);
+    z-index: 1000;
+  }
+  
+  .cursor2 {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: rgb(247, 238, 116);
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: width .3s, height .3s, opacity .3s;
+    z-index: 1000;
+  }
+
+body{
+    margin: 0;
+    background-image: url("/night2.gif");
+    background-size: contain;
+    font-family: 'Quicksand', sans-serif;
+}
+/* body::-webkit-scrollbar { 
+    display: none;
+} */
+
+h1{
+    color:rgb(0, 255, 255);
+}
+
+.grid-container{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px 15px;
+    margin: 20px;
+}
+
+.list-card{
+    border: 1px solid transparent;
+    border-radius: 20px;
+    height: 300px;
+    padding:10px 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: transparent;
+    transition: 0.2s ease-in-out;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-shadow: 0px 0px 10px white;
+    position: relative;
+}
+.list-card:hover{
+    background-color: #023e8a;
+}
+
+/* to make the scroolbar invisible */
+.list-card::-webkit-scrollbar { /* for chrome */
+    display: none;
+}
+
+.list-card { /* for IE, edge, firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.list-card-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:#fca311;
+}
+.list-card-title>h4{
+    font-size: 2rem;
+    margin:1rem 0;
+}
+
+.item-card{
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 10px 10px;
+    margin: 10px 0;
+    display:flex;
+    justify-content: space-between;
+    transition: 0.2s ease-in-out;
+    color:#ffc8dd;
+    font-weight: bold;
+    box-shadow: 0px 0px 5px white;
+}
+.item-card:hover{
+    background-color: rgb(0, 140, 255);
+}
+
+.add-item-input,
+#new-list-title{
+    box-sizing: border-box;
+    padding: 10px 10px;
+    margin: 10px 0;
+    outline: none;
+    border: none;
+    /* border-bottom: 1px solid black; */
+    /* border-radius: 50px; */
+    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+    background-color: transparent;
+    color: #ffc8dd;
+    /* cursor: pointer; */
+}
+
+::placeholder{
+    color: #ffc8dd;
+    font-weight:600;
+}
+
+.btn-item-delete, 
+.btn-list-delete,
+.btn-new-list{
+    background-color: transparent;
+    border: none;
+    color: rgb(60, 60, 60);
+    font-size: 1rem;
+    /* cursor: pointer; */
+}
+
+.btn-new-list{
+    font-size: 5rem;
+    margin-top: 20%;
+    /* border: 1px dashed white; */
+}
+
+.new-list-card>form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+}
+
+.add-item-form{
+    position:sticky;
+    bottom: 0;
+    width: 110%;
+    background-color: rgba(255,255,255,0.2);
+    backdrop-filter: blur(2px);
+    margin-left: -10px;
+}
+
+/* .item-completed{
+    position:absolute;
+    left:45%;
+    font-size: 1.5rem;
+    font-weight: bold;
+} */
+
+.item-input-checkbox{
+    height: 1rem;
+    width: 1rem;
+}

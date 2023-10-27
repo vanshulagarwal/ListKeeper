@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
-    task: String,
+    task: {
+        type: String,
+        required: [true, 'task content cannot be blank']
+    },
     // author: String,
-    completed: Boolean,
+    completed: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const Item = mongoose.model('Item', ItemSchema);

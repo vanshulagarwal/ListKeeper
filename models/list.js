@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Item = require('./item');
 
 const ListSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        required: [true, 'title cannot be blank']
+    },
     items: [
         {
             type: mongoose.Schema.Types.ObjectId,

@@ -1,0 +1,9 @@
+.flash-success{
+    background-color: green;
+    color: white;
+}
+
+.flash-error{
+    background-color: red;
+    color: white;
+}

@@ -5,8 +5,10 @@ const path = require('path');
 const Item = require('./models/item');
 const List = require('./models/list');
 const methodOverride = require('method-override');
-const catchAsync = require('./utils/catchAsync');
-const { listSchema, itemSchema } = require('./schemas');
+const listRoutes = require('./routes/lists');
+const itemRoutes = require('./routes/items');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const dbUrl = 'mongodb://127.0.0.1:27017/todo';
 mongoose.connect(dbUrl)
@@ -24,83 +26,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 
-const validateList = (req, res, next) => {
-    const { error } = listSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new Error(msg);
-    }
-    else {
-        next();
-    }
-}
-
-const validateItem = (req, res, next) => {
-    const { error } = itemSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new Error(msg);
-    }
-    else {
-        next();
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
+app.use(session(sessionConfig));
+app.use(flash());
 
-app.get('/home', catchAsync(async (req, res, next) => {
-    const allLists = await List.find({}).populate('items');
-    res.render('home', { allLists });
-}))
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 
-app.post('/home', validateList, catchAsync(async (req, res, next) => {
-    // if (!req.body.title) throw new Error('Invalid campground data');
-    const newList = new List({ ...req.body });
-    await newList.save();
-    console.log(newList);
-    res.redirect('/home');
-}))
+app.use('/home', listRoutes);
 
-app.post('/home/:id', validateItem, catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const myList = await List.findById(id);
-    if (!myList) {
-        throw new Error("Invalid list");
-    }
-    const newItem = new Item({ ...req.body });
-    myList.items.push(newItem);
-    await newItem.save();
-    await myList.save();
-    console.log(myList);
-    res.redirect('/home');
-}))
+app.use('/home/:id', itemRoutes);
 
-app.delete('/home/:id', catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const myList = await List.findByIdAndDelete(id);
-    if (!myList) {
-        throw new Error("Invalid list");
-    }
-    res.redirect('/home');
-}))
-
-app.put('/completed/:id', catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const myItem = await Item.findById(id);
-    if (!myItem) {
-        throw new Error("Invalid item");
-    }
-    const toggleCompleted = !(myItem.completed);
-    const updatedItem = await Item.findByIdAndUpdate(id, { completed: toggleCompleted });
-    console.log(updatedItem);
-    res.redirect('/home');
-}))
-
-app.delete('/home/:listId/items/:itemId', catchAsync(async (req, res, next) => {
-    const { listId, itemId } = req.params;
-    const myList = await List.findByIdAndUpdate(listId, { $pull: { items: itemId } });
-    await Item.findByIdAndDelete(itemId);
-    console.log(myList);
-    res.redirect('/home');
-}))
 
 app.all('*', (req, res, next) => {
     next(new Error('Page Not Found'));

@@ -11,7 +11,11 @@ const ListSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Item'
         }
-    ]
+    ],
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 ListSchema.post('findOneAndDelete', async function (doc) {

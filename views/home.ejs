@@ -19,6 +19,11 @@
     <main>
         <%- include('./flash') %>
     <h1>List Keeper</h1>
+    <div style="background-color: #ffffff;">
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+        <a href="/logout">Logout</a>
+    </div>
     <div class="grid-container">
     <% for(let List of allLists){ %>
         <div class="list-card">
@@ -34,7 +39,7 @@
             <div class="list-items">
                 <% for(let item of List.items) { %>
                     <div class="item-card">
-                        <form action="/home/<%= item._id %>/completed?_method=PUT" method="POST">
+                        <form action="/home/<%= List._id %>/taskcompleted/<%= item._id %>?_method=PUT" method="POST">
                             <input class="item-input-checkbox" type="checkbox" <%=item.completed==true?'checked':'' %>
                             onChange=this.form.submit() >
                         </form>

@@ -2,11 +2,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
-const Item = require('./models/item');
-const List = require('./models/list');
 const methodOverride = require('method-override');
 const listRoutes = require('./routes/lists');
 const itemRoutes = require('./routes/items');
+const userRoutes = require('./routes/users');
 const session = require('express-session');
 const flash = require('connect-flash');
 
@@ -26,13 +25,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 
+//creating a session
 const sessionConfig = {
     secret: 'thisshouldbeabettersecret!',
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, 
+        //auto deletes after 7 days
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
@@ -44,6 +45,8 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     next();
 })
+
+app.use('/', userRoutes);
 
 app.use('/home', listRoutes);
 

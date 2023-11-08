@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
+    <link rel="stylesheet" href="/stylesheets/error.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    errorrrrrr<br>
-    <%= err.message %><br>
-    <%= err.stack %>
+    <div class="error">
+        <p class="error-heading"><%= err.message %></p>
+        <p class="error-content"><%= err.stack %></p>
+    </div>
 </body>
 </html>

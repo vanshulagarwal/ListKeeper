@@ -30,8 +30,10 @@
 
 body{
     margin: 0;
-    background-image: url("/night2.gif");
-    background-size: contain;
+    /* background-image: url("/night2.gif"); */
+    background-image: linear-gradient(45deg,#0077b6, #90e0ef);
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
     font-family: 'Quicksand', sans-serif;
 }
 /* body::-webkit-scrollbar { 
@@ -65,7 +67,7 @@ h1{
     position: relative;
 }
 .list-card:hover{
-    background-color: #023e8a;
+    background-color: #0077b6;
 }
 
 /* to make the scroolbar invisible */
@@ -102,7 +104,7 @@ h1{
     box-shadow: 0px 0px 5px white;
 }
 .item-card:hover{
-    background-color: rgb(0, 140, 255);
+    background-color: #1554a4;
 }
 
 .add-item-input,
@@ -132,9 +134,14 @@ h1{
 .btn-new-list{
     background-color: transparent;
     border: none;
-    color: rgb(60, 60, 60);
+    color: white;
     font-size: 1rem;
     /* cursor: pointer; */
+}
+.btn-item-delete:hover, 
+.btn-list-delete:hover,
+.btn-new-list:hover{
+    color: #ff465d;
 }
 
 .btn-new-list{
@@ -170,4 +177,26 @@ h1{
 .item-input-checkbox{
     height: 1rem;
     width: 1rem;
+    color: blue;
+}
+
+@media (max-width:1400px) {
+    .grid-container{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media (max-width:1000px) {
+    .grid-container{
+        display:grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: 30px;
+    }
+}
+
+@media (max-width:677px) {
+    .grid-container{
+        grid-template-columns: repeat(1,1fr);
+        gap: 25px 15px;
+    }
 }

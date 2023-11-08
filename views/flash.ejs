@@ -1,11 +1,26 @@
-<% if(success && success.length) { %>
-<div class="flash-success">
-    <%= success %>
+<div class="flash-container">
+    <% if(success && success.length) { %>
+<div class="flash flash-success">
+    <img src="/green_tick.png" alt="">
+    <p><%= success %></p>
 </div>
 <% } %>
 
 <% if(error && error.length) {%>
-    <div class="flash-error">
-        <%= error %>
+    <div class="flash flash-error">
+        <img src="/red_tick.png" alt="">
+        <p><%= error %></p>
     </div>
 <% } %>
+
+<% if(caution && caution.length) {%>
+    <div class="flash flash-caution">
+        <img src="/caution_tick.png" alt="">
+        <p><%= caution %></p>
+    </div>
+<% } %>
+<!-- <div class="flash flash-caution">
+    <img src="/caution_tick.png" alt="">
+    <p>You need to be signed in first.</p>
+</div> -->
+</div>

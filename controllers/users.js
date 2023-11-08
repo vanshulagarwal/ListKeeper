@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 //npm i bcrypt is used to hash password before storing in database
 
 //RENDER REGISTER PAGE
-module.exports.renderRegister = (req, res, next) => {
-    res.render('register');
-}
+// module.exports.renderRegister = (req, res, next) => {
+//     res.render('register');
+// }
 
 //REGISTER USER
 module.exports.registerUser=async (req, res, next) => {
@@ -14,8 +14,8 @@ module.exports.registerUser=async (req, res, next) => {
 
     //if username already in use
     if (oldUser) {
-        req.flash('error', 'username you provided is already in use');
-        return res.redirect('/register');
+        req.flash('error', 'Username provided is already in use.');
+        return res.redirect('/login');
     }
 
     //hashing password and then storing in database
@@ -30,7 +30,7 @@ module.exports.registerUser=async (req, res, next) => {
     //storing user._id in session for further use
     //mainly used for authorization etc.
     req.session.user_id = newUser._id;
-    req.flash('success', `Registered Successfully ${newUser.username}`);
+    req.flash('success', `Successfully Registered ${newUser.username}`);
     res.redirect('/home');
 }
 
@@ -48,7 +48,7 @@ module.exports.loginUser=async (req, res, next) => {
     const foundUser = await User.findAndValidate(username, password);
     if (foundUser) {
         req.session.user_id = foundUser._id;
-        req.flash('success', `Welcome ${foundUser.username}`);
+        req.flash('success', `Welcome back, ${foundUser.username}`);
         res.redirect('/home');
     }
     else {
@@ -61,6 +61,6 @@ module.exports.loginUser=async (req, res, next) => {
 module.exports.logoutUser=(req, res, next) => {
     //removed the user saved in session
     req.session.user_id = null;
-    req.flash('success', 'Successfully Logged Out');
-    res.redirect('/login');
+    req.flash('success', 'Logged Out Successfully');
+    res.redirect('/');
 }

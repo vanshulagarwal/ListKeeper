@@ -1,0 +1,38 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 15px 0 10px;
+}
+
+.navbar h1 a{
+    text-decoration:none;
+    font-weight: 600;
+    color: #000f6c;
+}
+.navbar h1 a:visited{
+    color: #000f6c;
+}
+
+.nav-button{
+    width: auto;
+    color:#000f6c;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.7rem;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0px 0px 10px white;
+}
+.login-btn:hover{
+    /* cursor: pointer; */
+    background-color: #00a002;
+    color: white;
+}
+
+.logout-btn:hover{
+    background-color: rgb(255, 56, 56);
+    color: white;
+}

@@ -4,7 +4,7 @@ const { renderRegister, registerUser, renderLogin, loginUser, logoutUser } = req
 
 //REGISTER USER routes
 router.route('/register')
-    .get(renderRegister)
+    // .get(renderRegister)
     .post(registerUser)
 
 //LOGIN USER routes

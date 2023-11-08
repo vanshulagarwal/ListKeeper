@@ -4,21 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/flash.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <title>Sign In / Sign Up</title>
 </head>
 <body>
     <%- include('./flash') %>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username">
+    <div id="login-form" class="login-page">
+        <div class="form-box">
+            <div class="btn-box">
+                <button type="button" id="login-toggle-btn" class="toggle-btn">LogIn</button>
+                <button type="button" id="register-toggle-btn" class="toggle-btn">Register</button>
+            </div>
+            <div class="form-div">
+            <form id="loginForm" action="/login" method="POST">
+                <div class="input-div">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" class="input-group">
+                </div>
+                <div class="input-div">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" class="input-group">
+                </div>
+                <button class="submit-btn">LogIn</button>
+            </form>
+            <form id="registerForm" action="/register" method="POST">
+                <div class="input-div">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="input-group">
+                </div>
+                <div class="input-div">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" class="input-group">
+                </div>
+                <div class="input-div">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" class="input-group">
+                </div>
+                <button class="submit-btn">Register</button>
+            </form>
+            </div>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <button>Login</button>
-    </form>
+    </div>
+    <script src="/javascripts/login.js"></script>
+    <script src="/javascripts/flash.js"></script>
 </body>
 </html>

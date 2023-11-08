@@ -19,7 +19,7 @@ module.exports.createList = async (req, res, next) => {
     });
     await newList.save();
     console.log(newList);
-    req.flash('success', 'Successfully created a new list');
+    req.flash('success', `Created list ${newList.title}`);
     res.redirect('/home');
 }
 

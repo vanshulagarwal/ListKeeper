@@ -1,9 +1,50 @@
+.flash-container{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    /* transform: rotate(-90deg); */
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    width: 50%;
+    max-width: 250px;
+    margin-left: -250px;
+    padding: 10px;
+    transition:all 0.2s ease-in-out;
+    z-index: 2000;
+}
+.flash{
+    border-radius: 0px 10px 0px 10px;
+    opacity: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flash p{
+    margin: 0;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.flash img{
+    height: 25px;
+}
+
 .flash-success{
-    background-color: green;
-    color: white;
+    background-color: #a9f5c4;
+    border: 1.5px solid #418a5a;
+    color: #418a5a;
 }
 
 .flash-error{
-    background-color: red;
-    color: white;
+    background-color: #ffc0c0;
+    border: 1.5px solid #c32f08;
+    color: #c32f08;
+}
+
+.flash-caution{
+    background-color: #ffefda;
+    border: 1.5px solid #ef8e01;
+    color: #ef8e01;
 }

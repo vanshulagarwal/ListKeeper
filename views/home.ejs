@@ -7,23 +7,19 @@
     <title>ToDo Keeper</title>
     <link rel="stylesheet" href="/stylesheets/home.css">
     <link rel="stylesheet" href="/stylesheets/flash.css">
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <%- include('./flash') %>
     <div class="cursor"></div>
 <div class="cursor2"></div>
     <main>
-        <%- include('./flash') %>
-    <h1>List Keeper</h1>
-    <div style="background-color: #ffffff;">
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-        <a href="/logout">Logout</a>
-    </div>
+    <%- include('./navbar') %>
     <div class="grid-container">
     <% for(let List of allLists){ %>
         <div class="list-card">
@@ -32,7 +28,7 @@
                     <%= List.title %>
                 </h4>
                 <form action="/home/<%= List._id %>?_method=DELETE" method="POST">
-                    <button class="btn-list-delete"><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></button>
+                    <button class="btn-list-delete"><i class="fa-solid fa-delete-left" ></i></button>
                 </form>
             </div>
 
@@ -46,7 +42,7 @@
                         <div <%= item.completed==true?"style=opacity:0.5;":"" %>><%= item.task %></div>
                         <!-- <div class="item-completed"><i class="fa-solid fa-check" style="color: #00ff00;"></i></div> -->
                         <form action="/home/<%= List._id %>/items/<%= item._id %>?_method=DELETE" method="POST">
-                            <button class="btn-item-delete" type="submit"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                            <button class="btn-item-delete" type="submit"><i class="fa-solid fa-trash" ></i></button>
                         </form>
                     </div>
                 <% } %>
@@ -61,13 +57,14 @@
     <div class="list-card new-list-card">
         <form action="/home" method="POST">
             <input id="new-list-title" type="text" name="title" placeholder="New List" >
-            <button class="btn-new-list" type="submit"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+            <button class="btn-new-list" type="submit"><i class="fa-solid fa-plus" ></i></button>
         </form>
     </div>
 </div>
 </main>
 
 <script src="/javascripts/home.js"></script>
+<script src="/javascripts/flash.js"></script>
 </body>
 
 </html>

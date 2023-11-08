@@ -32,7 +32,7 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, 
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         //auto deletes after 7 days
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -41,9 +41,15 @@ app.use(session(sessionConfig));
 app.use(flash());
 
 app.use((req, res, next) => {
+    res.locals.user_id=req.session.user_id;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.caution = req.flash('caution');
     next();
+})
+
+app.get('/', (req, res, next) => {
+    res.render('landingPage');
 })
 
 app.use('/', userRoutes);

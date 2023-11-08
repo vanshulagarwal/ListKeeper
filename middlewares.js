@@ -3,7 +3,7 @@ const { listSchema, itemSchema } = require('./schemas');
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.session.user_id) {
-        req.flash('success', 'You need to Signed in first');
+        req.flash('caution', 'You need to Signed in first');
         return res.redirect('/login');
     }
     next();

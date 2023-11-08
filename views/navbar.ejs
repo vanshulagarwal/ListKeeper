@@ -1,0 +1,11 @@
+<div class="navbar">
+    <h1><a href="/">List Keeper</a></h1>
+    <div class="navcontent">
+        <% if(!user_id) { %>
+        <!-- <a href="/register"><button class="nav-button">Register</button></a> -->
+        <a href="/login"><button class="nav-button login-btn">SignUp / In</button></a>
+        <% } else {%>
+        <a href="/logout"><button class="nav-button logout-btn">Logout</button></a>
+        <% } %>
+    </div>
+</div>

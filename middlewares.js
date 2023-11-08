@@ -23,7 +23,8 @@ module.exports.validateList = (req, res, next) => {
     const { error } = listSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
-        throw new Error(msg);
+        req.flash('caution',msg);
+        res.redirect('/home');
     }
     else {
         next();
@@ -34,7 +35,8 @@ module.exports.validateItem = (req, res, next) => {
     const { error } = itemSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
-        throw new Error(msg);
+        req.flash('caution',msg);
+        res.redirect('/home');
     }
     else {
         next();

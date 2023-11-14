@@ -19,7 +19,7 @@ module.exports.createList = async (req, res, next) => {
     });
     await newList.save();
     console.log(newList);
-    req.flash('success', `Created list ${newList.title}`);
+    req.flash('success', `Created list, ${newList.title}`);
     res.redirect('/home');
 }
 
@@ -30,6 +30,6 @@ module.exports.deleteList = async (req, res, next) => {
     if (!myList) {
         throw new Error("Invalid list");
     }
-    req.flash('success', `${myList.title} was discarded`);
+    req.flash('success', `${myList.title} was discarded.`);
     res.redirect('/home');
 }

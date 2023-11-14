@@ -3,7 +3,7 @@ const { listSchema, itemSchema } = require('./schemas');
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.session.user_id) {
-        req.flash('caution', 'You need to Signed in first');
+        req.flash('caution', 'You need to Sign in to continue');
         return res.redirect('/login');
     }
     next();
@@ -13,7 +13,7 @@ module.exports.isOwner = async (req, res, next) => {
     const { id } = req.params;
     const list = await List.findById(id);
     if (!list.owner.equals(req.session.user_id)) {
-        req.flash('error', 'You do not have permission to do that. You will be blocked if you try to breach security.');
+        req.flash('error', 'You do not have permission to do that. Your account will be blocked if you try to breach security.');
         return res.redirect('/home');
     }
     next();

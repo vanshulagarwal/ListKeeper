@@ -47,7 +47,6 @@ body{
 .btn-start:hover{
     background-color: #00a002;
     /* rgb(0, 192, 255); #ffa100; */
-    cursor: pointer;
     color: white;
 }
 

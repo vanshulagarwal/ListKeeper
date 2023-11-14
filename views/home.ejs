@@ -37,9 +37,8 @@
             <div class="list-items">
                 <% for(let item of List.items) { %>
                     <div class="item-card">
-                        <form action="/home/<%= List._id %>/taskcompleted/<%= item._id %>?_method=PUT" method="POST">
-                            <input class="item-input-checkbox" type="checkbox" <%=item.completed==true?'checked':'' %>
-                            onChange=this.form.submit() >
+                        <form action="/home/<%= List._id %>/taskcompleted/<%= item._id %>?_method=PUT" method="POST" class="taskcompletedForm">
+                            <input class="item-input-checkbox" type="checkbox" <%=item.completed==true?'checked':'' %>>
                         </form>
                         <div <%= item.completed==true?"style=opacity:0.5;":"" %>><%= item.task %></div>
                         <!-- <div class="item-completed"><i class="fa-solid fa-check" style="color: #00ff00;"></i></div> -->
@@ -65,6 +64,13 @@
 </div>
 </main>
 
+<script>
+    document.querySelectorAll('.item-input-checkbox').forEach(el=>{
+        el.addEventListener('change',()=>{
+            el.closest('form').submit();
+        })
+    })
+</script>
 <script src="/javascripts/cursor.js"></script>
 <script src="/javascripts/flash.js"></script>
 </body>

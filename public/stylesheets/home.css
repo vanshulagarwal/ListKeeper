@@ -106,12 +106,15 @@ h1{
     border: none;
     color: white;
     font-size: 1rem;
+    transition: color 0.2s ease-in-out;
     /* cursor: pointer; */
 }
 .btn-item-delete:hover, 
-.btn-list-delete:hover,
-.btn-new-list:hover{
+.btn-list-delete:hover{
     color: #ff465d;
+}
+.btn-new-list:hover{
+    color:#fca311;
 }
 
 .btn-new-list{

@@ -1,10 +1,12 @@
+*{
+    font-family: 'Quicksand', sans-serif;
+}
 body{
     margin: 0;
     /* background-image: url("/night2.gif"); */
     background-size: 100vw 100vh;
     /* background-repeat: no-repeat; */
     background-attachment: fixed;
-    font-family: 'Quicksand', sans-serif;
     background-image: linear-gradient(#48cae4,#caf0f8) ;
 }
 .landing{
@@ -29,6 +31,10 @@ body{
     padding: 0 70px;
     width: 50%;
     text-align: justify;
+}
+
+.landing-content p{
+    font-weight: 500;
 }
 
 .btn-start{

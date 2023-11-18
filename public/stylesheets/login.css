@@ -1,10 +1,17 @@
-.displayNone{
-    display: none;
+*{
+	font-family: 'Quicksand', sans-serif;
 }
 body{
 	background-image: linear-gradient(225deg,#e839f6,rgb(97 216 222)) ;
 	background-size: 100vw 100vh;
-    font-family: 'Quicksand', sans-serif;
+	margin: 0;
+	/* min-height: 100vh; */
+}
+
+.login-page{
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
 }
 
 .form-box
@@ -12,7 +19,7 @@ body{
     width:280px;
 	height:380px;
 	position:relative;
-	margin:2% auto;
+	margin: 0 auto;
 	background-color:white;
 	padding:0 ;
 	display: flex;

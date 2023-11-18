@@ -59,3 +59,4 @@ Contributions are welcome! If you'd like to contribute to List Keeper, please ma
 
 - Listkeeper uses icons provided by https://fontawesome.com/
 - The favicon for the app was provided by https://www.flaticon.com/
+- The fonts for the app are provided by https://fonts.google.com/
